@@ -46,7 +46,8 @@ class CategoryOwnerFilter(admin.SimpleListFilter):
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'category', 'status', 'created_time', 'operator')
+    list_display = ('title', 'category', 'status',
+                    'owner', 'created_time', 'operator')
     list_display_links = []
 
     list_filter = [CategoryOwnerFilter]
@@ -57,6 +58,8 @@ class PostAdmin(admin.ModelAdmin):
 
     # 编辑页面
     save_on_top = True
+
+    exclude = ('owner',)
 
     fields = (('category', 'title'), 'desc', 'status', 'content', 'tag',)
 
