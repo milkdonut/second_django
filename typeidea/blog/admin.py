@@ -61,7 +61,29 @@ class PostAdmin(admin.ModelAdmin):
 
     exclude = ('owner',)
 
-    fields = (('category', 'title'), 'desc', 'status', 'content', 'tag',)
+    # fields = (('category', 'title'), 'desc', 'status', 'content', 'tag',)
+    fieldsets = (
+        (
+            '基础配置',
+            {
+                'description': '基础配置描述',
+                'fields': (('title', 'category'), 'status',),
+            }
+        ),
+        (
+            '内容',
+            {
+                'fields': ('desc', 'content',),
+            }
+        ),
+        (
+            '额外信息',
+            {
+                'classes': ('collapse',),
+                'fields': ('tag',),
+            }
+        )
+    )
 
     def operator(self, obj):
         return format_html('<a href="{}">编辑<a/>', reverse('admin:blog_post_change', args=(obj.id,)))
@@ -74,3 +96,8 @@ class PostAdmin(admin.ModelAdmin):
     def get_queryset(self, request):
         qs = super(PostAdmin, self).get_queryset(request)
         return qs.filter(owner=request.user)
+
+    # class Media:
+    #     css = {
+    #         'all': ("https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css",), }
+    #     js = ('https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.bundle.js',)
