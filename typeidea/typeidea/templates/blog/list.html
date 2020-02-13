@@ -8,12 +8,12 @@
 
 <body>
     <div>
-    顶部分类：
-    {% for cate in navs %}
-    <a href="/category/{{ cate.id }}/">{{ cate.name }}</a>
-    {% endfor %}
+        顶部分类：
+        {% for cate in navs %}
+        <a href="/category/{{ cate.id }}/">{{ cate.name }}</a>
+        {% endfor %}
     </div>
-    <hr/>
+    <hr />
 
     {% if tag %}
     标签页：{{ tag.name }}
@@ -36,13 +36,20 @@
         {% endfor %}
     </ul>>
 
-    <hr/>
+    <hr />
     <div>
-    顶部分类：
-    {% for cate in navs %}
-    <a href="/category/{{ cate.id }}/">{{ cate.name }}</a>
-    {% endfor %}
-    </div>    
+        顶部分类：
+        {% for cate in navs %}
+        <a href="/category/{{ cate.id }}/">{{ cate.name }}</a>
+        {% endfor %}
+    </div>
+    <div>
+        侧边栏展示：
+        {% for sidebar in sidebars %}
+        <h4>{{sidebar.title}}</h4>
+        {{sidebar.content}}
+        {% endfor %}
+    </div>
 </body>
 
 </html>
